@@ -8,7 +8,7 @@ return  (
 ): nature === "planets" ? ( 
     <h1>soy planet</h1> ): nature === "vehicules" ? (<h1>soy vehiculos</h1>): null}
 
-
+// {condicion ? sentence : condicion ? } //
 </>  
 
 );

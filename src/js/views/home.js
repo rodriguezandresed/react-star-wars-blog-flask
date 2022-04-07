@@ -7,9 +7,12 @@ export const Home = () => {
 	const {store} = useContext(Context)
 	return (
 		<>
-	<Card nature="planets">
+		{store.demo.map((item) =>(
+			<Card key={item} nature="people">
 
-</Card>
+			</Card>
+		))}
+
 		</>
 	);
 		};
