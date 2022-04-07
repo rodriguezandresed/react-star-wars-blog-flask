@@ -1,6 +1,6 @@
 import React from 'react'
 
- const Card = (nature) => {
+ const Card = ({properties}) => {
 return  (
 <>
 {nature === "people" ?(
@@ -9,6 +9,9 @@ return  (
     <h1>soy planet</h1> ): nature === "vehicules" ? (<h1>soy vehiculos</h1>): null}
 
 // {condicion ? sentence : condicion ? } //
+
+{properties.gender}
+
 </>  
 
 );
