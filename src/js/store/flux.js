@@ -1,22 +1,22 @@
-const getState = ({ getStore, getActions, setStore }) => {
+const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
 		URL_BASE:"https://www.swapi.tech/api",
 		endPoints: ["people","planets","vehicles"],
-		people: JSON.parse(localStorage.setItem("people"))||[],
-		planets: JSON.parse(localStorage.setItem("planets"))||[],
-		vehicles:JSON.parse(localStorage.setItem("vehicles"))||[],
+		people: JSON.parse(localStorage.getItem("people"))||[],
+		planets: JSON.parse(localStorage.getItem("planets"))||[],
+		vehicles: JSON.parse(localStorage.getItem("vehicles"))||[],
 		},
 		actions: {
 			fetchItems: async () => {
 				let store = getStore();
-				if (!store.people.lenght){
+				if (!store.people.length){
 					for(let endPoint of store.endPoints) {
 						try {
 							let response = await fetch (`${store.URL_BASE}/${endPoint}`);
 							if (response.ok){
 								let data = await response.json();
-								data.result.map(async (item)=>{
+								data.results.map(async (item)=>{
 									let responseTwo = await fetch (`${store.URL_BASE}/${endPoint}/${item.uid}`);
 									let resultTwo = await responseTwo.json();
 									setStore({
