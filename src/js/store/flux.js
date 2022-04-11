@@ -32,13 +32,14 @@ const getState = ({ getStore, setStore }) => {
 					}
 				}
 			},
-			addFavorites: (id) => {
+			
+			addFavorites: (item) => {
 				let store= getStore();
 				console.log(item);
 				let exist = store.favorites.find((item) =>{
 				
 					return(
-						item.properties._id == id
+						item._id == id
 						)
 				})
 				if(!exist){
@@ -46,7 +47,7 @@ const getState = ({ getStore, setStore }) => {
 						let favorite;
 						favorite = store[endPoint].find((item) =>{
 							return(
-								item.properties._id == id
+								item._id == id
 							)
 						})
 						if(favorite){
