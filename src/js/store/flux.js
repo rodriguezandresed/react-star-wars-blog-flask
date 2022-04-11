@@ -31,6 +31,40 @@ const getState = ({ getStore, setStore }) => {
 						}
 					}
 				}
+			},
+			addFavorites: (id) => {
+				let store= getStore();
+				console.log(item);
+				let exist = store.favorites.find((item) =>{
+				
+					return(
+						item.properties._id == id
+						)
+				})
+				if(!exist){
+					for(let endPoint of store.endPoints){
+						let favorite;
+						favorite = store[endPoint].find((item) =>{
+							return(
+								item.properties._id == id
+							)
+						})
+						if(favorite){
+							setStore({
+								...store, favorites: [...store.favorites, favorite]
+							})
+						}
+					}
+				}else {
+					let newFavorite = store.favorites.filter((item) =>{
+						return(
+							item.properties._id != id
+						)
+					})
+					setStore({
+						...store, favorites: newFavorite
+					})
+				}
 			}
 		}
 	};
