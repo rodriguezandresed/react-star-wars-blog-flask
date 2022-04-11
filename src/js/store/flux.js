@@ -6,6 +6,7 @@ const getState = ({ getStore, setStore }) => {
 		people: JSON.parse(localStorage.getItem("people"))||[],
 		planets: JSON.parse(localStorage.getItem("planets"))||[],
 		vehicles: JSON.parse(localStorage.getItem("vehicles"))||[],
+		favorites: []
 		},
 		actions: {
 			fetchItems: async () => {
@@ -33,10 +34,9 @@ const getState = ({ getStore, setStore }) => {
 				}
 			},
 			
-			addFavorites: (id, item) => {
+			addFavorites: (id) => {
 				let store= getStore();
 				console.log(id);
-				console.log(item);
 				let exist = store.favorites.find((item) =>{
 				
 					return(

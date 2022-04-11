@@ -21,14 +21,14 @@ export const Navbar = () => {
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 		   {store.favorites == "" && <li className="ms-2">(empty)</li>}
-{/* 
+
 {store.favorites.map((item) => {
 		
 return (
 
 	<li key={item.properties.uid} className="ms-2">{item.properties.name}</li>
 )
-})}  */}
+})} 
 
 
           </ul>
