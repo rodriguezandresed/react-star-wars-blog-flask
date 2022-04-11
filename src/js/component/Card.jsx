@@ -20,7 +20,7 @@ const Card = ({ nature, item }) => {
                         </div>
                         <div className="card-footer">
                             <button type="button" className="btn btn-primary">Learn more!</button>
-                            <button type="button" className="btn btn-primary" onClick={() => actions.addFavorites(item)}>favorito</button>
+                            <button type="button" className="btn btn-primary" onClick={() => actions.addFavorites(item._id)}>favorito</button>
                         </div>
                     </div>
 
@@ -42,7 +42,7 @@ const Card = ({ nature, item }) => {
                             </div>
                             <div className="card-footer">
                                 <button type="button" className="btn btn-primary">Learn more!</button>
-                                <button type="button" className="btn btn-primary" onClick={() => actions.addFavorites(item)}>favorito</button>
+                                <button type="button" className="btn btn-primary" onClick={() => actions.addFavorites(item._id)}>favorito</button>
                             </div>
                         </div>
 
@@ -61,7 +61,7 @@ const Card = ({ nature, item }) => {
                                 </div>
                                 <div className="card-footer">
                                     <button type="button" className="btn btn-primary">Learn more!</button>
-                                    <button type="button" className="btn btn-primary" onClick={() => actions.addFavorites(item)}>favorito</button>
+                                    <button type="button" className="btn btn-primary" onClick={() => actions.addFavorites(item._id)}>favorito</button>
                                 </div>
                             </div>
 

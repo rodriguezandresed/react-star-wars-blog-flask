@@ -33,8 +33,9 @@ const getState = ({ getStore, setStore }) => {
 				}
 			},
 			
-			addFavorites: (item) => {
+			addFavorites: (id, item) => {
 				let store= getStore();
+				console.log(id);
 				console.log(item);
 				let exist = store.favorites.find((item) =>{
 				
@@ -59,7 +60,7 @@ const getState = ({ getStore, setStore }) => {
 				}else {
 					let newFavorite = store.favorites.filter((item) =>{
 						return(
-							item.properties._id != id
+							item._id != id
 						)
 					})
 					setStore({
