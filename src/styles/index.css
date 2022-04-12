@@ -19,3 +19,9 @@
 .card-description{
     padding: 10px 15px;
 }
+
+.line {
+    border:2px solid red;
+    padding: 0px;
+    margin: 20px 0px 0px 0px;
+}

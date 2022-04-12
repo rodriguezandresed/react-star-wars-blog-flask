@@ -6,7 +6,7 @@ const getState = ({ getStore, setStore }) => {
 		people: JSON.parse(localStorage.getItem("people"))||[],
 		planets: JSON.parse(localStorage.getItem("planets"))||[],
 		vehicles: JSON.parse(localStorage.getItem("vehicles"))||[],
-		favorites: []
+		favorites: JSON.parse(localStorage.getItem("favorites"))||[]
 		},
 		actions: {
 			fetchItems: async () => {
@@ -36,9 +36,9 @@ const getState = ({ getStore, setStore }) => {
 			
 			addFavorites: (id) => {
 				let store= getStore();
-				console.log(id);
-				let exist = store.favorites.find((item) =>{
 				
+				let exist = store.favorites.find((item) =>{
+					console.log(item);
 					return(
 						item._id == id
 						)
@@ -53,7 +53,7 @@ const getState = ({ getStore, setStore }) => {
 						})
 						if(favorite){
 							setStore({
-								...store, favorites: [...store.favorites, favorite]
+								...store, favorites: [...store.favorites, {...favorite, nature:endPoint}]
 							})
 						}
 					}
