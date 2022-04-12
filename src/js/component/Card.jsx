@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext"
 
 const Card = ({ nature, item }) => {
-    const { store, actions } = useContext(Context);
+    const { actions } = useContext(Context);
     return (
         <>
 
