@@ -9,7 +9,7 @@ const iconHeart = <FontAwesomeIcon icon={faHeart} />
 
 
 const Card = ({ nature, item }) => {
-    const { actions } = useContext(Context);
+    const { actions,store } = useContext(Context);
     const [color, setColor] = useState("");
     return (
         <>
@@ -26,21 +26,13 @@ const Card = ({ nature, item }) => {
                             <p className="card-text">Eyes color: {item.properties.eye_color}</p>
                         </div>
                         <div className="card-footer d-flex justify-content-between">
-                            <Link type="button" className="btn btn-outline-primary " to={`/details/people/${item.uid}`}>Learn More!
+                            <Link type="button" className="btn btn-outline-primary " to={`/details/people/${item.uid}`}>Learn More! </Link>
 
-
-
-
-                            {/* <div  className={`luz amarilla ${color === "amarilla" && "encendido"}`}onClick={() => {setColor("amarilla");}}></div> */}
-
-
-                            </Link>
-                            <button type="button" className={`btn btn-outline-warning text-favorite ${color === "favorited" ? "active" : ""} `} onClick={() => { actions.addFavorites(item._id); setColor("favorited");} }>{iconHeart}</button>
-                            {/* <button type="button" className="btn btn-outline-warning text-favorite " onClick={() => actions.addFavorites(item._id)}>{iconHeart}</button> */}
+            
+                            <button type="button" className={`btn btn-outline-warning text-favorite ${color === "favorited" ? "active" : ""} `} onClick={() => {actions.addFavorites(item._id); setColor("favorited");} }>{iconHeart}</button>
+                           
                         </div>
                     </div>
-
-
 
 
                 ) :

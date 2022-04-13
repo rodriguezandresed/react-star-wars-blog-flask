@@ -12,6 +12,7 @@ export const Home = () => {
 				<h1 className="head-text pt-3 pb-3">People</h1>
 				<div className="home-card-list">
 					{store.people.map((person) => {
+
 						return (<Card key={person.uid} item={person} nature="people">
 
 						</Card>)
