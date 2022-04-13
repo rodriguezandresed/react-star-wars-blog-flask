@@ -4,7 +4,7 @@
 
 
 .home-card-list{
-    border: 1px solid black;
+
     display:flex;
     overflow-x: scroll;
 }
@@ -12,16 +12,30 @@
 .card-single{
     width: 400px;
     border: 1px solid gray;
+    border-radius: 5px;
+    margin: 0px 10px;
+    
+}
+
+.card-detail{
+    width: 400px;
+    border: 1px solid gray;
+    border-radius: 5px;
     margin: 0px 10px;
     
 }
 
 .card-description{
     padding: 10px 15px;
+    width: 400px;
 }
 
 .line {
     border:2px solid red;
     padding: 0px;
-    margin: 20px 0px 0px 0px;
+    margin: 20px 0px 20px 0px;
+}
+
+.col-text, .head-text {
+    color:red;
 }
