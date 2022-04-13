@@ -2,6 +2,11 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import starWarsLogo from '../../img/Star-Wars-Logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+
+const iconTrash = <FontAwesomeIcon icon={faTrash} />
+
 
 
 export const Navbar = () => {
@@ -28,7 +33,7 @@ export const Navbar = () => {
                     return (
 
 
-                      <li key={item.uid} className="ms-2"> <Link className="dropdown-item" to={`/details/${item.nature}/${item.uid}`}> {item.properties.name}</Link> </li>
+                      <li key={item.uid} className="ms-2 d-flex">  <Link className="dropdown-item" to={`/details/${item.nature}/${item.uid}`}> {item.properties.name} </Link> <span onClick={() => actions.addFavorites(item._id)} >{iconTrash}</span> </li>
                     )
                   })
 

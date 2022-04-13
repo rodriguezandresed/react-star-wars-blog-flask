@@ -2,6 +2,12 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext"
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+
+const iconHeart = <FontAwesomeIcon icon={faHeart} />
+
+
 const Card = ({ nature, item }) => {
     const { actions } = useContext(Context);
     return (
@@ -19,8 +25,17 @@ const Card = ({ nature, item }) => {
                             <p className="card-text">Eyes color: {item.properties.eye_color}</p>
                         </div>
                         <div className="card-footer d-flex justify-content-between">
-                        <Link type="button"   className="btn btn-outline-primary" to={`/details/people/${item.uid}`}> Learn More!</Link> 
-                            <button type="button"  className="btn btn-outline-warning" onClick={() => actions.addFavorites(item._id)}>favorito</button>
+                        <Link type="button"   className="btn btn-outline-primary " to={`/details/people/${item.uid}`}>Learn More!
+
+
+                   
+                        
+                   
+
+
+
+                        </Link> 
+                            <button type="button"  className="btn btn-outline-warning text-favorite" onClick={() => actions.addFavorites(item._id)}>{iconHeart}</button>
                         </div>
                     </div>
 
@@ -43,7 +58,7 @@ const Card = ({ nature, item }) => {
                             <div className="card-footer d-flex justify-content-between">
                            
                             <Link type="button"   className="btn btn-outline-primary" to={`/details/vehicles/${item.uid}`}> Learn More!</Link> 
-                                <button type="button" className="btn btn-outline-warning" onClick={() => actions.addFavorites(item._id, nature)}>favorito</button>
+                                <button type="button" className="btn btn-outline-warning text-favorite" onClick={() => actions.addFavorites(item._id, nature)}>{iconHeart}</button>
                             </div>
                         </div>
 
@@ -62,7 +77,7 @@ const Card = ({ nature, item }) => {
                                 </div>
                                 <div className="card-footer d-flex justify-content-between">
                                 <Link type="button"   className="btn btn-outline-primary" to={`/details/planets/${item.uid}`}> Learn More!</Link> 
-                                    <button type="button"  className="btn btn-outline-warning" onClick={() => actions.addFavorites(item._id)}>favorito</button>
+                                    <button type="button"  className="btn btn-outline-warning text-favorite" onClick={() => actions.addFavorites(item._id)}>{iconHeart}</button>
                                 </div>
                             </div>
 
