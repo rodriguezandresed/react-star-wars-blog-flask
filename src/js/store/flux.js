@@ -54,7 +54,11 @@ const getState = ({ getStore, setStore }) => {
 						if (favorite) {
 							setStore({
 								...store, favorites: [...store.favorites, { ...favorite, nature: endPoint }]
-							})
+							});
+							localStorage.setItem(
+								"favorites",
+								JSON.stringify(getStore().favorites)
+							);
 						}
 					}
 				} else {
@@ -65,7 +69,11 @@ const getState = ({ getStore, setStore }) => {
 					})
 					setStore({
 						...store, favorites: newFavorite
-					})
+					});
+					localStorage.setItem(
+						"favorites",
+						JSON.stringify(getStore().favorites)
+					);
 				}
 			}
 		}
