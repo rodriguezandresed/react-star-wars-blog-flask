@@ -95,7 +95,7 @@ export const Details = () => {
                                 <div className="col col-text text-center"><p>Class</p> <p>{detailLocal.vehicle_class}</p></div>
                                 <div className="col col-text text-center"><p>Cost In Credits</p> <p>{detailLocal.cost_in_credits}</p></div>
                                 <div className="col col-text text-center"><p>Max Atmosphering Speed</p> <p>{detailLocal.max_atmosphering_speed}</p></div>
-                                <div className="col col-text text-center"><p>Lenght</p> <p>{detailLocal.lenght}</p></div>
+                                <div className="col col-text text-center"><p>Length</p> <p>{detailLocal.length}</p></div>
                             </div>
 
 
