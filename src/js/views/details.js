@@ -46,13 +46,13 @@ return (
 </div>
 
 <div className="row line"></div>
-<div class="row row-cols-6">
-    <div class="col">Column</div>
-    <div class="col">Column</div>
-    <div class="col">Column</div>
-    <div class="col">Column</div>
-    <div class="col">Column</div>
-    <div class="col">Column</div>
+<div className="row row-cols-6">
+    <div className="col">Column</div>
+    <div className="col">Column</div>
+    <div className="col">Column</div>
+    <div className="col">Column</div>
+    <div className="col">Column</div>
+    <div className="col">Column</div>
   </div>
 
 

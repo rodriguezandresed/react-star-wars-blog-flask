@@ -19,7 +19,7 @@ const Card = ({ nature, item }) => {
                             <p className="card-text">Eyes color: {item.properties.eye_color}</p>
                         </div>
                         <div className="card-footer">
-                            <button type="button" className="btn btn-primary">Learn more!</button>
+                            <Link type="button" className="btn btn-primary" to={`/details/people/${item.uid}`}> Learn More!</Link>
                             <button type="button" className="btn btn-primary" onClick={() => actions.addFavorites(item._id)}>favorito</button>
                         </div>
                     </div>
@@ -41,7 +41,8 @@ const Card = ({ nature, item }) => {
                                 <p className="card-text">Cost in Credits: {item.properties.cost_in_credits}</p>
                             </div>
                             <div className="card-footer">
-                                <button type="button" className="btn btn-primary">Learn more!</button>
+
+                                <Link type="button" className="btn btn-primary" to={`/details/vehicles/${item.uid}`}> Learn More!</Link>
                                 <button type="button" className="btn btn-primary" onClick={() => actions.addFavorites(item._id, nature)}>favorito</button>
                             </div>
                         </div>
@@ -60,7 +61,7 @@ const Card = ({ nature, item }) => {
                                     <p className="card-text">Population: {item.properties.population}</p>
                                 </div>
                                 <div className="card-footer">
-                                    <button type="button" className="btn btn-primary">Learn more!</button>
+                                    <Link type="button" className="btn btn-primary" to={`/details/planets/${item.uid}`}> Learn More!</Link>
                                     <button type="button" className="btn btn-primary" onClick={() => actions.addFavorites(item._id)}>favorito</button>
                                 </div>
                             </div>

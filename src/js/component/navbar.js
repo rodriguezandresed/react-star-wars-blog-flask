@@ -28,7 +28,7 @@ export const Navbar = () => {
                     return (
 
                      
-                     <li key={item.properties.uid} className="ms-2"> <Link className="dropdown-item" to={`/details/${item.nature}/${item.uid}`}> {item.properties.name}</Link> </li>
+                     <li key={item.uid} className="ms-2"> <Link className="dropdown-item" to={`/details/${item.nature}/${item.uid}`}> {item.properties.name}</Link> </li>
                     )
                   })
 
