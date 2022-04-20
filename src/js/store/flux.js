@@ -22,7 +22,7 @@ const getState = ({ getStore, setStore }) => {
 									let resultTwo = await responseTwo.json();
 									setStore({
 										...store,
-										[endPoint]: [...store[endPoint], resultTwo.result]
+										[endPoint]: [...store[endPoint], {...resultTwo.result, status:false}]
 									});
 									localStorage.setItem(endPoint, JSON.stringify(store[endPoint]))
 								})
@@ -32,48 +32,52 @@ const getState = ({ getStore, setStore }) => {
 						}
 					}
 				}
-			},
+			},									
 
 			addFavorites: (id) => {
 				let store = getStore();
-
-				let exist = store.favorites.find((item) => {
-
-					return (
-						item._id == id
-					)
-				})
+				let exist = store.favorites.find((item) => item._id == id);
 				if (!exist) {
 					for (let endPoint of store.endPoints) {
-						let favorite;
-						favorite = store[endPoint].find((item) => {
-							return (
-								item._id == id
-							)
-						})
-						if (favorite) {
+						let newArr =[];
+						for (let item of store[endPoint]){
+							if (item._id == id){
+								item.status = true;
 							setStore({
-								...store, favorites: [...store.favorites, { ...favorite, nature: endPoint, favorite: "favorited" }]
+								...store, favorites: [...store.favorites, { ...item, nature: endPoint}]
 							});
-							localStorage.setItem(
-								"favorites",
-								JSON.stringify(getStore().favorites)
-							);
+							}
+							newArr.push(item);
 						}
+							setStore({...store,[endPoint]: newArr,});
+							localStorage.setItem("favorites",JSON.stringify(getStore().favorites));
+							localStorage.setItem(endPoint, JSON.stringify(store[endPoint]));
+							newArr=[];
 					}
 				} else {
-					let newFavorite = store.favorites.filter((item) => {
-						return (
-							item._id != id
-						)
-					})
-					setStore({
-						...store, favorites: newFavorite
-					});
-					localStorage.setItem(
-						"favorites",
-						JSON.stringify(getStore().favorites)
-					);
+					let newFavorite = store.favorites.filter((item) => item._id != id);
+					for (let endPoint of store.endPoints){
+						let newArr = [];
+						for (let item of store[endPoint]){
+							if (item._id == id) {
+								item.status=false;
+								setStore({
+									...store, favorites: newFavorite
+								});
+							}
+							newArr.push(item);
+						}
+						setStore({
+							...store, [endPoint]: newArr,
+						});
+						localStorage.setItem(
+							"favorites",
+							JSON.stringify(getStore().favorites)
+						);
+						localStorage.setItem(endPoint, JSON.stringify(store[endPoint]));
+						newArr = [];
+					}
+
 				}
 			}
 		}

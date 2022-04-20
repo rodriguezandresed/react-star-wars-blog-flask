@@ -29,7 +29,7 @@ const Card = ({ nature, item }) => {
                             <Link type="button" className="btn btn-outline-primary " to={`/details/people/${item.uid}`}>Learn More! </Link>
 
             
-                            <button type="button" className={`btn btn-outline-warning text-favorite ${color === "favorited" ? "active" : ""} `} onClick={() => {actions.addFavorites(item._id); setColor("favorited");} }>{iconHeart}</button>
+                            <button type="button" className={`btn btn-outline-warning text-favorite ${item.status === true ? "active" : ""} `} onClick={() => {actions.addFavorites(item._id); setColor("favorited");} }>{iconHeart}</button>
                            
                         </div>
                     </div>
@@ -51,7 +51,7 @@ const Card = ({ nature, item }) => {
                             <div className="card-footer d-flex justify-content-between">
 
                                 <Link type="button" className="btn btn-outline-primary" to={`/details/vehicles/${item.uid}`}> Learn More!</Link>
-                                <button type="button" className="btn btn-outline-warning text-favorite" onClick={() => actions.addFavorites(item._id, nature)}>{iconHeart}</button>
+                                <button type="button" className={`btn btn-outline-warning text-favorite ${item.status === true ? "active" : ""} `} onClick={() => actions.addFavorites(item._id, nature)}>{iconHeart}</button>
                             </div>
                         </div>
 
@@ -70,7 +70,7 @@ const Card = ({ nature, item }) => {
                                 </div>
                                 <div className="card-footer d-flex justify-content-between">
                                     <Link type="button" className="btn btn-outline-primary" to={`/details/planets/${item.uid}`}> Learn More!</Link>
-                                    <button type="button" className="btn btn-outline-warning text-favorite" onClick={() => actions.addFavorites(item._id)}>{iconHeart}</button>
+                                    <button type="button" className={`btn btn-outline-warning text-favorite ${item.status === true ? "active" : ""} `} onClick={() => actions.addFavorites(item._id)}>{iconHeart}</button>
                                 </div>
                             </div>
 
