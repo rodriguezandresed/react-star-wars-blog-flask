@@ -5,34 +5,52 @@ const getState = ({ getStore, setStore }) => {
 			endPoints: ["people", "planets", "vehicles"],
 			people: JSON.parse(localStorage.getItem("people")) || [],
 			planets: JSON.parse(localStorage.getItem("planets")) || [],
-			vehicles: JSON.parse(localStorage.getItem("vehicles")) || [],
+			// vehicles: JSON.parse(localStorage.getItem("vehicles")) || [],
 			favorites: JSON.parse(localStorage.getItem("favorites")) || []
 		},
 		actions: {
 			fetchItems: async () => {
 				let store = getStore();
-				if (!store.people.length) {
-					for (let endPoint of store.endPoints) {
-						try {
-							let response = await fetch(`${store.URL_BASE}/${endPoint}`);
-							if (response.ok) {
-								let data = await response.json();
-								data.results.map(async (item) => {
-									let responseTwo = await fetch(`${store.URL_BASE}/${endPoint}/${item.uid}`);
-									let resultTwo = await responseTwo.json();
-									setStore({
-										...store,
-										[endPoint]: [...store[endPoint], {...resultTwo.result, status:false}]
-									});
-									localStorage.setItem(endPoint, JSON.stringify(store[endPoint]))
-								})
-							}
-						} catch (error) {
-							console.log(error)
+				if (!store.people.lenght | !store.planets.lenght){
+					try {
+						let response = await fetch(`${store.URL_BASE}/people`)
+						let data = await response.json()
+						let response2 = await fetch(`${store.URL_BASE}/planets`)
+						let data2 = await response2.json()
+						if(response.ok){
+							localStorage.setItem("people", JSON.stringify(data))
 						}
-					}
+						if(response2.ok){
+							localStorage.setItem("planets", JSON.stringify(data2))
+						}
+					} catch (error) {
+						console.log("These aren't the droids you're looking for", error)
+					}								
 				}
-			},									
+			},
+				
+			// 	if (!store.people.length) {
+			// 		for (let endPoint of store.endPoints) {
+			// 			try {
+			// 				let response = await fetch(`${store.URL_BASE}/${endPoint}`);
+			// 				if (response.ok) {
+			// 					let data = await response.json();
+			// 					data.results.map(async (item) => {
+			// 						let responseTwo = await fetch(`${store.URL_BASE}/${endPoint}/${item.uid}`);
+			// 						let resultTwo = await responseTwo.json();
+			// 						setStore({
+			// 							...store,
+			// 							[endPoint]: [...store[endPoint], {...resultTwo.result, status:false}]
+			// 						});
+			// 						localStorage.setItem(endPoint, JSON.stringify(store[endPoint]))
+			// 					})
+			// 				}
+			// 			} catch (error) {
+			// 				console.log(error)
+			// 			}
+			// 		}
+			// 	}
+			// },									
 
 			addFavorites: (id) => {
 				let store = getStore();
