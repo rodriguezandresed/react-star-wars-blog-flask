@@ -1,7 +1,7 @@
 const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
-			URL_BASE: "https://www.swapi.tech/api",
+			URL_BASE: "http://127.0.0.1:3000",
 			endPoints: ["people", "planets", "vehicles"],
 			people: JSON.parse(localStorage.getItem("people")) || [],
 			planets: JSON.parse(localStorage.getItem("planets")) || [],

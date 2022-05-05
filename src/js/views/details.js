@@ -7,12 +7,12 @@ export const Details = () => {
     const { store } = useContext(Context);
     const [detailLocal, setDetailLocal] = useState({});
 
-    const { nature, uid } = params;
+    const { nature, id } = params;
     const getDetails = () => {
-        const detail = store[nature].find(item => item.uid === uid);
-
+        const detail = store[nature].find(item => item.id === item.id);
         if (detail) {
-            setDetailLocal(detail.properties);
+            
+            setDetailLocal(detail);
 
         }
 
