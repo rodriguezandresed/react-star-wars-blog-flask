@@ -9,7 +9,9 @@ export const Details = () => {
 
     const { nature, id } = params;
     const getDetails = () => {
-        const detail = store[nature].find(item => item.id === item.id);
+        
+        const detail = store[nature].find(item => item.id === store[nature][id].id-1);
+        console.log(detail)
         if (detail) {
             
             setDetailLocal(detail);
