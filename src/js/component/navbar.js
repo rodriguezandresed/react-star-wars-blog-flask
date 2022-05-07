@@ -36,7 +36,7 @@ export const Navbar = () => {
                     return (
 
 
-                      <li key={item.uid} className="ms-2 d-flex">  <Link  onClick={() => window.location.href=`/details/${item.nature}/${item.uid}`} className="dropdown-item" to={`/details/${item.nature}/${item.uid}`}>  {item.properties.name} </Link> <span onClick={(event) => {actions.addFavorites(item._id);}} >{iconTrash}</span> </li>
+                      <li key={item.id} className="ms-2 d-flex">  <Link  onClick={() => window.location.href=`/details/${item.nature}/${item.id}`} className="dropdown-item" to={`/details/${item.nature}/${item.id}`}>  {item.name} </Link> <span onClick={(event) => {actions.addFavorites(item.id, item.nature, item.name);}} >{iconTrash}</span> </li>
                     )
                   })
 

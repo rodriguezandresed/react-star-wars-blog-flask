@@ -29,7 +29,7 @@ const Card = ({ nature, item }) => {
                             <Link type="button" className="btn btn-outline-primary " to={`/details/people/${item.id}`}>Learn More! </Link>
 
             
-                            <button type="button" className={`btn btn-outline-warning text-favorite ${item.status === true ? "active" : ""} `} onClick={() => {actions.addFavorites(item._id); setColor("favorited");} }>{iconHeart}</button>
+                            <button type="button" className={`btn btn-outline-warning text-favorite ${item.status === true ? "active" : ""} `} onClick={() => {actions.addFavorites(item.id, item.nature, item.name); setColor("favorited");} }>{iconHeart}</button>
                            
                         </div>
                     </div>
@@ -70,7 +70,7 @@ const Card = ({ nature, item }) => {
                                 </div>
                                 <div className="card-footer d-flex justify-content-between">
                                     <Link type="button" className="btn btn-outline-primary" to={`/details/planets/${item.id}`}> Learn More!</Link>
-                                    <button type="button" className={`btn btn-outline-warning text-favorite ${item.status === true ? "active" : ""} `} onClick={() => actions.addFavorites(item._id)}>{iconHeart}</button>
+                                    <button type="button" className={`btn btn-outline-warning text-favorite ${item.status === true ? "active" : ""} `} onClick={() => actions.addFavorites(item.id, item.nature, item.name)}>{iconHeart}</button>
                                 </div>
                             </div>
 
