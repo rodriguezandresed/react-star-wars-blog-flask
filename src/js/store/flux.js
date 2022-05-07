@@ -101,7 +101,6 @@ const getState = ({ getStore, setStore }) => {
 					}
 				} else {
 					let newFavorite = store.favorites.filter((item) => item.name != name);
-					console.log(newFavorite)
 					for (let endPoint of store.endPoints) {
 						let newArr = [];
 
@@ -137,8 +136,10 @@ const getState = ({ getStore, setStore }) => {
 				body: JSON.stringify(register)
 				})
 				let data = await response.json()
+				let store = getStore();
+				
 				if (response.ok){
-					console.log(data)
+					
 					setStore({
 						...store,token:data.token
 					})
@@ -146,8 +147,15 @@ const getState = ({ getStore, setStore }) => {
 				}
 			},
 
-			logOut: () =>{
-				const store = getStore()
+			handleLogOut: () =>{
+				const store = getStore();
+				setStore({
+					favorites:[]
+				})
+				localStorage.setItem(
+					"favorites",
+					JSON.stringify(getStore().favorites)
+				);
 				setStore({
 					...store,
 					token:""
@@ -164,13 +172,71 @@ const getState = ({ getStore, setStore }) => {
 				body: JSON.stringify(login)
 				})
 				let data = await response.json()
+				let store = getStore();
 				if (response.ok){
-					console.log(data)
+					
 					setStore({
 						...store,token:data.token
 					})
 					localStorage.setItem("token",data.token)
 				}
+
+
+			},
+			handleFavoriteRemote: async (item) => {
+				let store = getStore();
+				let fav = {"favorite_name":item.name, "favorite_id":item.nature, "favorite_nature":item.nature, "user_id":2}
+				const response = await fetch (`http://127.0.0.1:3000/favorites/${item.nature}/${item.id}`, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					"Authorization": `Bearer ${store.token}`
+				},
+				body: JSON.stringify(fav)
+				
+				})
+				console.log(fav)
+				let data = await response.json()
+				if (response.ok){
+					console.log("Se agrego favorito")
+				}
+			},
+			handleFavoriteRemoteRemove: async (item) => {
+				let store = getStore();
+				let fav = {"favorite_name":item.name, "favorite_id":item.nature, "favorite_nature":item.nature, "user_id":2}
+				const response = await fetch (`http://127.0.0.1:3000/favorites/${item.nature}/${item.id}`, {
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+					"Authorization": `Bearer ${store.token}`
+				},
+				body: JSON.stringify(fav)
+				
+				})
+				console.log(fav)
+				let data = await response.json()
+				if (response.ok){
+					console.log("Se elimino favorito")
+				}
+			},
+			handleGetRemoteFavorites: async () => {
+				let store = getStore();
+				const response = await fetch ("http://127.0.0.1:3000/favorites", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						"Authorization": `Bearer ${store.token}`
+					}
+					})
+					let data = await response.json()
+					console.log(data)
+					
+					if (response.ok){
+						setStore({
+							...store, favorites:data 
+						});
+						localStorage.setItem("favorites", JSON.stringify(getStore().favorites));
+					}
 			}
 		}
 	};

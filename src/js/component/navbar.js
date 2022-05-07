@@ -22,8 +22,11 @@ export const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNavDropdown">
-        {store.token.length>0  ? 
+        {store.token != ""  ? 
+        
           <ul className="navbar-nav">
+            <button type="button" onClick={()=> actions.handleGetRemoteFavorites()}>Get Favorites</button>
+            <button type="button" onClick={()=> actions.handleLogOut()}>Log Out</button>
             <li className="nav-item dropdown ">
               <a className="nav-link dropdown-toggle bg-primary text-light rounded" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Favorites <span className="favorite-text bg-secondary">({store.favorites.length})</span>
@@ -37,7 +40,7 @@ export const Navbar = () => {
                     return (
 
 
-                      <li key={item.id} className="ms-2 d-flex">  <Link onClick={() => window.location.href = `/details/${item.nature}/${item.id}`} className="dropdown-item" to={`/details/${item.nature}/${item.id}`}>  {item.name} </Link> <span onClick={(event) => { actions.addFavorites(item.id, item.nature, item.name); }} >{iconTrash}</span> </li>
+                      <li key={item.id} className="ms-2 d-flex">  <Link onClick={() => window.location.href = `/details/${item.favorite_nature}/${item.favorite_id}`} className="dropdown-item" to={`/details/${item.favorite_nature}/${item.favorite_id}`}>  {item.favorite_name} </Link> <span onClick={(event) => { actions.addFavorites(item.favorite_id, item.favorite_nature, item.favorite_name), actions.handleFavoriteRemoteRemove(item); }} >{iconTrash}</span> </li>
                     )
                   })
 
