@@ -12,20 +12,21 @@ const iconTrash = <FontAwesomeIcon icon={faTrash} />
 
 
 export const Navbar = () => {
-  
+
   const { store, actions } = useContext(Context);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light ">
       <div className="container-fluid d-flex justify-content-between">
-        <Link className="navbar-brand" to="/"> <img src={starWarsLogo} alt="logo" width="10%" heigh="auto"  /></Link>
+        <Link className="navbar-brand" to="/"> <img src={starWarsLogo} alt="logo" width="10%" heigh="auto" /></Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNavDropdown">
+        {store.token.length>0  ? 
           <ul className="navbar-nav">
             <li className="nav-item dropdown ">
               <a className="nav-link dropdown-toggle bg-primary text-light rounded" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Favorites <span className="favorite-text bg-secondary">({store.favorites.length})</span>
+                Favorites <span className="favorite-text bg-secondary">({store.favorites.length})</span>
               </a>
               <ul className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 
@@ -36,7 +37,7 @@ export const Navbar = () => {
                     return (
 
 
-                      <li key={item.id} className="ms-2 d-flex">  <Link  onClick={() => window.location.href=`/details/${item.nature}/${item.id}`} className="dropdown-item" to={`/details/${item.nature}/${item.id}`}>  {item.name} </Link> <span onClick={(event) => {actions.addFavorites(item.id, item.nature, item.name);}} >{iconTrash}</span> </li>
+                      <li key={item.id} className="ms-2 d-flex">  <Link onClick={() => window.location.href = `/details/${item.nature}/${item.id}`} className="dropdown-item" to={`/details/${item.nature}/${item.id}`}>  {item.name} </Link> <span onClick={(event) => { actions.addFavorites(item.id, item.nature, item.name); }} >{iconTrash}</span> </li>
                     )
                   })
 
@@ -47,6 +48,8 @@ export const Navbar = () => {
               </ul>
             </li>
           </ul>
+ : (<><Link to="/login">Log In</Link>
+ <Link to="/register">Registrar</Link></>)}
         </div>
       </div>
     </nav>

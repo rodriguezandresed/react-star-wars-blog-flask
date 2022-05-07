@@ -2,6 +2,7 @@ const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
 			URL_BASE: "http://127.0.0.1:3000",
+			token: localStorage.getItem("token") || "",
 			endPoints: ["people", "planets"],
 			people: JSON.parse(localStorage.getItem("people")) || [],
 			planets: JSON.parse(localStorage.getItem("planets")) || [],
@@ -11,49 +12,49 @@ const getState = ({ getStore, setStore }) => {
 		actions: {
 			fetchItems: async () => {
 				let store = getStore();
-				if (!store.people.length | !store.planets.length){
+				if (!store.people.length | !store.planets.length) {
 					try {
 						let response = await fetch(`${store.URL_BASE}/people`)
 						let data = await response.json()
 						let response2 = await fetch(`${store.URL_BASE}/planets`)
 						let data2 = await response2.json()
-						if(response.ok){
-							
-							for (let sentinel=0; sentinel<data.length;sentinel++){
+						if (response.ok) {
 
-							
-							
-										setStore({
-												...store,
-												["people"]: [...store["people"], {...data[sentinel], status:false, nature:"people"}]
-												});
-							
+							for (let sentinel = 0; sentinel < data.length; sentinel++) {
+
+
+
+								setStore({
+									...store,
+									["people"]: [...store["people"], { ...data[sentinel], status: false, nature: "people" }]
+								});
+
 							}
 							localStorage.setItem("people", JSON.stringify(store["people"]));
-						
-							
+
+
 						}
-						if(response2.ok){
+						if (response2.ok) {
 
-							for (let sentinel=0; sentinel<data2.length;sentinel++){
+							for (let sentinel = 0; sentinel < data2.length; sentinel++) {
 
-							
-							
+
+
 								setStore({
-										...store,
-										["planets"]: [...store["planets"], {...data2[sentinel], status:false, nature:"planets"}]
-										});
-					
-					}
-					localStorage.setItem("planets", JSON.stringify(store["planets"]));
-				
+									...store,
+									["planets"]: [...store["planets"], { ...data2[sentinel], status: false, nature: "planets" }]
+								});
+
+							}
+							localStorage.setItem("planets", JSON.stringify(store["planets"]));
+
 						}
 					} catch (error) {
 						console.log("These aren't the droids you're looking for", error)
-					}								
+					}
 				}
 			},
-				
+
 			// 	if (!store.people.length) {
 			// 		for (let endPoint of store.endPoints) {
 			// 			try {
@@ -79,34 +80,34 @@ const getState = ({ getStore, setStore }) => {
 
 			addFavorites: (id, nature, name) => {
 				let store = getStore();
-				let exist = store.favorites.find((item) => item.id == id && item.nature == nature && item.name==name);
+				let exist = store.favorites.find((item) => item.id == id && item.nature == nature && item.name == name);
 				console.log(name)
 				if (!exist) {
 					for (let endPoint of store.endPoints) {
-						let newArr =[];
-						for (let item of store[endPoint]){
-							if (item.id == id && item.nature == nature && item.name==name){
+						let newArr = [];
+						for (let item of store[endPoint]) {
+							if (item.id == id && item.nature == nature && item.name == name) {
 								item.status = true;
-							setStore({
-								...store, favorites: [...store.favorites, { ...item, nature: endPoint}]
-							});
+								setStore({
+									...store, favorites: [...store.favorites, { ...item, nature: endPoint }]
+								});
 							}
 							newArr.push(item);
 						}
-							setStore({...store,[endPoint]: newArr,});
-							localStorage.setItem("favorites",JSON.stringify(getStore().favorites));
-							localStorage.setItem(endPoint, JSON.stringify(store[endPoint]));
-							newArr=[];
+						setStore({ ...store, [endPoint]: newArr, });
+						localStorage.setItem("favorites", JSON.stringify(getStore().favorites));
+						localStorage.setItem(endPoint, JSON.stringify(store[endPoint]));
+						newArr = [];
 					}
 				} else {
 					let newFavorite = store.favorites.filter((item) => item.name != name);
 					console.log(newFavorite)
-					for (let endPoint of store.endPoints){
+					for (let endPoint of store.endPoints) {
 						let newArr = [];
-						
-						for (let item of store[endPoint]){
-							if (item.id == id && item.nature == nature && item.name==name) {
-								item.status=false;
+
+						for (let item of store[endPoint]) {
+							if (item.id == id && item.nature == nature && item.name == name) {
+								item.status = false;
 								setStore({
 									...store, favorites: newFavorite
 								});
@@ -124,6 +125,51 @@ const getState = ({ getStore, setStore }) => {
 						newArr = [];
 					}
 
+				}
+			},
+
+			handleRegister: async (register) => {
+				const response = await fetch ("http://127.0.0.1:3000/user", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(register)
+				})
+				let data = await response.json()
+				if (response.ok){
+					console.log(data)
+					setStore({
+						...store,token:data.token
+					})
+					localStorage.setItem("token",data.token)
+				}
+			},
+
+			logOut: () =>{
+				const store = getStore()
+				setStore({
+					...store,
+					token:""
+				})
+				localStorage.setItem("token",JSON.stringify(""))
+			},
+
+			handleLogIn: async (login) => {
+				const response = await fetch ("http://127.0.0.1:3000/login", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				body: JSON.stringify(login)
+				})
+				let data = await response.json()
+				if (response.ok){
+					console.log(data)
+					setStore({
+						...store,token:data.token
+					})
+					localStorage.setItem("token",data.token)
 				}
 			}
 		}
